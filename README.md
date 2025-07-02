@@ -6,3 +6,8 @@ Update Rust
 source $HOME/.cargo/env
 rustup update
 ```
+
+# installation
+```bash
+cargo install --path .
+```

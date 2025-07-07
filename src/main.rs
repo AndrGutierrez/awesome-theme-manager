@@ -16,7 +16,7 @@ fn main() {
         let win = MainWindow::new(app);
         let header = Header::new();
         let main_box = Box::new(gtk::Orientation::Vertical, 50);
-        let action_bar = Footer::new();
+        let action_bar = Footer::new(win.as_ref());
         let label = Label::builder().label("Lorem ipsum").build();
         main_box.append(&label);
         main_box.append(action_bar.as_ref());

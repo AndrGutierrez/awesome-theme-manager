@@ -8,7 +8,9 @@ use std::thread;
 use std::process::Command;
 pub type ApplyButton = WidgetWrapper<gtk::Button>;
 
+use crate::widgets::confirmation_dialog::ConfirmationDialog;
 use fs_extra::dir::{CopyOptions, copy};
+use gtk::{Window, prelude::*};
 use std::env;
 use std::fs;
 use std::path::Path;
@@ -40,21 +42,44 @@ fn sync_theme(source: &str) -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn change_theme(theme_name: &str) {
-    sync_theme(theme_name);
+    match sync_theme(theme_name) {
+        Ok(f) => f,
+        Err(err) => {}
+    }
     Command::new("awesome-client")
         .arg("awesome.restart()")
         .status()
         .expect("Failed to restart Awesome WM");
 }
 impl ApplyButton {
-    pub fn new() -> Self {
+    pub fn new(window: &impl IsA<Window>) -> Self {
         let button = Button::builder().label("Apply").build();
-        button.connect_clicked(move |button| {
+
+        let dialog = ConfirmationDialog::new(
+            window,
+            "Confirm Theme Change",
+            "Are you sure you want to apply the 'void-heart' theme?\nThis will restart AwesomeWM.",
+        );
+        button.connect_clicked(move |_| {
             thread::spawn(move || {
                 change_theme("void-heart");
             })
             .join()
             .unwrap();
+
+            // `await` the user's response without blocking the UI.
+            let response = dialog.run();
+
+            // Check if the user clicked the "OK" button.
+            //if response == gtk::ResponseType::Ok {
+            //    // The `change_theme` function performs blocking file I/O and runs an external command.
+            //    // It MUST be run on a separate thread to avoid freezing the user interface.
+            //    thread::spawn(move || {
+            //        change_theme("void-heart");
+            //    });
+            //} else {
+            //    //println!("User cancelled the theme change.");
+            //}
         });
         button.set_size_request(100, 40);
         button.add_css_class("suggested-action");

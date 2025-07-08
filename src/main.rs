@@ -1,7 +1,7 @@
 mod utils;
 mod widgets;
 mod window;
-use gtk::{Application, Box};
+use gtk::{Application, ApplicationWindow, Box, MessageDialog};
 use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
 use widgets::header::Header;
@@ -13,10 +13,10 @@ fn main() {
         .build();
 
     app.connect_activate(|app| {
-        let win = MainWindow::new(app);
+        let win = ApplicationWindow::new(app);
         let header = Header::new();
         let main_box = Box::new(gtk::Orientation::Vertical, 50);
-        let action_bar = Footer::new(win.as_ref());
+        let action_bar = Footer::new(&win);
         let label = Label::builder().label("Lorem ipsum").build();
         main_box.append(&label);
         main_box.append(action_bar.as_ref());
@@ -25,6 +25,7 @@ fn main() {
 
         win.set_titlebar(Some(header.as_ref()));
         win.set_child(Some(&main_box));
+
         win.show();
     });
 

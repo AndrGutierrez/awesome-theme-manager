@@ -1,11 +1,12 @@
 mod utils;
 mod widgets;
 mod window;
-use gtk::{Application, ApplicationWindow, Box, MessageDialog};
+use gtk::{Application, ApplicationWindow, Box};
 use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
 use widgets::header::Header;
-use window::MainWindow;
+
+use crate::widgets::gallery::Gallery;
 
 fn main() {
     let app = Application::builder()
@@ -15,13 +16,13 @@ fn main() {
     app.connect_activate(|app| {
         let win = ApplicationWindow::new(app);
         let header = Header::new();
-        let main_box = Box::new(gtk::Orientation::Vertical, 50);
+        let main_box = Box::new(gtk::Orientation::Vertical, 500);
         let action_bar = Footer::new(&win);
         let label = Label::builder().label("Lorem ipsum").build();
+        let gallerybox = Gallery::new(&win);
         main_box.append(&label);
         main_box.append(action_bar.as_ref());
-        //main_box.append(apply_button.as_ref());
-        //main_box.append(action_bar.as_ref());
+        main_box.append(gallerybox.as_ref());
 
         win.set_titlebar(Some(header.as_ref()));
         win.set_child(Some(&main_box));

@@ -1,6 +1,5 @@
 mod utils;
 mod widgets;
-mod window;
 use gtk::{Application, ApplicationWindow, Box};
 use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
@@ -17,9 +16,9 @@ fn main() {
         let win = ApplicationWindow::new(app);
         let header = Header::new();
         let main_box = Box::new(gtk::Orientation::Vertical, 50);
-        let action_bar = Footer::new(&win);
+        let action_bar = Footer::new();
         let label = Label::builder().label("Lorem ipsum").build();
-        let gallerybox = Gallery::new(&win);
+        let gallerybox = Gallery::new();
         main_box.append(&label);
         main_box.append(gallerybox.as_ref());
         main_box.append(action_bar.as_ref());

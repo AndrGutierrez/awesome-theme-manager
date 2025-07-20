@@ -1,11 +1,11 @@
 use crate::utils::widget_wrapper::WidgetWrapper;
-use gtk::{ApplicationWindow, Box, Image, Label, prelude::*};
+use gtk::{Box, Image, Label, prelude::*};
 use std::path::Path;
 
 pub type Gallery = WidgetWrapper<gtk::Box>;
 
 impl Gallery {
-    pub fn new(window: &ApplicationWindow) -> Self {
+    pub fn new() -> Self {
         let image_path = "example.png";
         let bx = Box::new(gtk::Orientation::Vertical, 0);
         let title = Label::new(Some("void-heart"));

@@ -9,7 +9,7 @@ use std::process::Command;
 pub type ApplyButton = WidgetWrapper<gtk::Button>;
 
 use fs_extra::dir::{CopyOptions, copy};
-use gtk::{ApplicationWindow, prelude::*};
+use gtk::prelude::*;
 use std::env;
 use std::fs;
 use std::path::Path;
@@ -51,7 +51,7 @@ fn change_theme(theme_name: &str) {
         .expect("Failed to restart Awesome WM");
 }
 impl ApplyButton {
-    pub fn new(window: &impl IsA<ApplicationWindow>) -> Self {
+    pub fn new() -> Self {
         let button = Button::builder().label("Apply").build();
 
         button.connect_clicked(move |_| {

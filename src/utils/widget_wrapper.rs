@@ -1,23 +1,26 @@
-pub struct WidgetWrapper<T> {
+use std::ops::{Deref, DerefMut};
+
+pub struct WidgetWrapper<T: AsRef<gtk::Widget>> {
     pub inner: T,
 }
 
-impl<T> std::ops::Deref for WidgetWrapper<T> {
+impl<T: AsRef<gtk::Widget>> Deref for WidgetWrapper<T> {
     type Target = T;
 
-    fn deref(&self) -> &Self::Target {
+    fn deref(&self) -> &T {
         &self.inner
     }
 }
 
-impl<T> std::ops::DerefMut for WidgetWrapper<T> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
+impl<T: AsRef<gtk::Widget>> DerefMut for WidgetWrapper<T> {
+    fn deref_mut(&mut self) -> &mut T {
         &mut self.inner
     }
 }
 
-impl<T> AsRef<T> for WidgetWrapper<T> {
-    fn as_ref(&self) -> &T {
-        &self.inner
+impl<T: AsRef<gtk::Widget>> AsRef<gtk::Widget> for WidgetWrapper<T> {
+    fn as_ref(&self) -> &gtk::Widget {
+        self.inner.as_ref()
     }
 }
+

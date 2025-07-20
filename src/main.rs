@@ -5,7 +5,7 @@ use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
 use widgets::header::Header;
 
-use crate::widgets::gallery::Gallery;
+use crate::widgets::gallery::gallery::Gallery;
 
 fn main() {
     let app = Application::builder()
@@ -20,7 +20,7 @@ fn main() {
         let label = Label::builder().label("Lorem ipsum").build();
         let gallerybox = Gallery::new();
         main_box.append(&label);
-        main_box.append(gallerybox.as_ref());
+        main_box.append(gallerybox.inner.as_ref());
         main_box.append(action_bar.as_ref());
 
         win.set_titlebar(Some(header.as_ref()));

@@ -12,6 +12,7 @@ impl Gallery {
         let bx = Grid::builder().margin_start(0).build();
         bx.attach(itm1.as_ref(), 3, 0, 2, 1);
         bx.attach(itm2.as_ref(), 1, 0, 2, 1);
+        bx.attach(itm2.as_ref(), 1, 0, 2, 1);
         Self {
             inner: WidgetWrapper { inner: bx },
         }

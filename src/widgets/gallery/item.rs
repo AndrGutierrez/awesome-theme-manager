@@ -1,5 +1,5 @@
 use crate::utils::widget_wrapper::WidgetWrapper;
-use gtk::{Box, Image, Label, prelude::*};
+use gtk::{Box, Image, Label, Picture, prelude::*};
 use std::path::Path;
 
 pub struct Item {
@@ -18,8 +18,9 @@ impl Item {
         }
 
         // Create image widget
-        let image = Image::from_file(image_path);
-        image.set_size_request(500, 400);
+        let image = Picture::for_filename(image_path);
+        image.set_can_shrink(true); // Allow shrinking if needed
+        image.set_size_request(250, -1);
         bx.append(&image);
         bx.append(&title);
 
@@ -29,3 +30,4 @@ impl Item {
         //Self { inner: bx };
     }
 }
+

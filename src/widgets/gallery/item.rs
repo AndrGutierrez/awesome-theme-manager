@@ -9,7 +9,7 @@ pub struct Item {
 impl Item {
     pub fn new() -> Self {
         let image_path = "example.png";
-        let bx = Box::new(gtk::Orientation::Vertical, 0);
+        let bx = Box::new(gtk::Orientation::Vertical, 20);
         let title = Label::new(Some("void-heart"));
         // Verify file exists first
         if !Path::new(image_path).exists() {
@@ -19,8 +19,6 @@ impl Item {
 
         // Create image widget
         let image = Picture::for_filename(image_path);
-        image.set_can_shrink(true); // Allow shrinking if needed
-        image.set_size_request(250, -1);
         bx.append(&image);
         bx.append(&title);
 
@@ -30,4 +28,3 @@ impl Item {
         //Self { inner: bx };
     }
 }
-

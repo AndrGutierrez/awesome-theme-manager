@@ -23,6 +23,7 @@ fn main() {
         main_box.append(gallerybox.inner.as_ref());
         main_box.append(action_bar.as_ref());
 
+        win.set_default_size(1080, 700);
         win.set_titlebar(Some(header.as_ref()));
         win.set_child(Some(&main_box));
 

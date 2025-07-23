@@ -19,11 +19,10 @@ impl Gallery {
         bx.attach(itm2.as_ref(), 1, 0, 1, 1);
         bx.attach(itm1.as_ref(), 2, 0, 1, 1);
         bx.attach(itm3.as_ref(), 3, 0, 1, 1);
-        bx.attach(itm4.as_ref(), 4, 0, 1, 1);
+        bx.attach(itm4.as_ref(), 1, 2, 1, 1);
         //bx.attach(child, column, row, width, height);
         Self {
             inner: WidgetWrapper { inner: bx },
         }
     }
 }
-

@@ -1,12 +1,22 @@
 mod utils;
 mod widgets;
-use gtk::{Application, ApplicationWindow, Box};
+
+use gtk::{Application, ApplicationWindow, Box, CssProvider};
 use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
 use widgets::header::Header;
 
 use crate::widgets::gallery::gallery::Gallery;
+fn load_css() {
+    let provider = CssProvider::new();
+    provider.load_from_path("src/assets/style.css");
 
+    gtk::style_context_add_provider_for_display(
+        &gtk::gdk::Display::default().expect("Could not connect to a display."),
+        &provider,
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+    );
+}
 fn main() {
     let app = Application::builder()
         .application_id("org.example.HelloWorld")
@@ -29,6 +39,6 @@ fn main() {
 
         win.show();
     });
-
+    app.connect_startup(|_| load_css());
     app.run();
 }

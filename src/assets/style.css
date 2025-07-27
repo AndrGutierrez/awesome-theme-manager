@@ -3,10 +3,16 @@ button {
 }
 
 .gallery-item {
+
   padding: 8px;
   border-radius: 3px;
-  background-color: red;
+  transition: background-color 100ms ease-out;
+}
+
+.gallery-item.selected {
   background-color: alpha(@theme_selected_bg_color, 0.3);
 }
 
-.item.selected {}
+/*.gallery-item:hover {*/
+/*  background-color: alpha(@theme_bg_color, 0.1);*/
+/*}*/

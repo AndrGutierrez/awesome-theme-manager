@@ -12,20 +12,27 @@ impl Item {
         let bx = Box::new(gtk::Orientation::Vertical, 20);
         let title = Label::new(Some("void-heart"));
         bx.add_css_class("gallery-item");
-        // Verify file exists first
         if !Path::new(image_path).exists() {
-            //eprintln!("Image file not found: {}", image_path);
             std::process::exit(1);
         }
 
-        // Create image widget
         let image = Picture::for_filename(image_path);
         bx.append(&image);
         bx.append(&title);
 
+        let click_controller = gtk::GestureClick::new();
+        click_controller.connect_pressed(|controller, _, _, _| {
+            if let Some(widget) = controller.widget() {
+                if widget.has_css_class("selected") {
+                    widget.remove_css_class("selected");
+                } else {
+                    widget.add_css_class("selected");
+                }
+            }
+        });
+        bx.add_controller(click_controller);
         return Self {
             inner: WidgetWrapper { inner: bx },
         };
-        //Self { inner: bx };
     }
 }

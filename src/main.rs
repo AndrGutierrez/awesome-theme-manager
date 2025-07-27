@@ -1,6 +1,7 @@
 mod utils;
 mod widgets;
 
+use gtk::gdk::Display;
 use gtk::{Application, ApplicationWindow, Box, CssProvider};
 use gtk::{Label, prelude::*};
 use widgets::footer::Footer;
@@ -12,7 +13,7 @@ fn load_css() {
     provider.load_from_path("src/assets/style.css");
 
     gtk::style_context_add_provider_for_display(
-        &gtk::gdk::Display::default().expect("Could not connect to a display."),
+        &Display::default().expect("Could not connect to a display."),
         &provider,
         gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
     );

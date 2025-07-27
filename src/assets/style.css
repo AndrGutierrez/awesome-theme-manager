@@ -1,3 +1,12 @@
 button {
   /*color: red;*/
 }
+
+.gallery-item {
+  padding: 8px;
+  border-radius: 3px;
+  background-color: red;
+  background-color: alpha(@theme_selected_bg_color, 0.3);
+}
+
+.item.selected {}

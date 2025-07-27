@@ -11,6 +11,7 @@ impl Item {
         let image_path = "example.png";
         let bx = Box::new(gtk::Orientation::Vertical, 20);
         let title = Label::new(Some("void-heart"));
+        bx.add_css_class("gallery-item");
         // Verify file exists first
         if !Path::new(image_path).exists() {
             //eprintln!("Image file not found: {}", image_path);

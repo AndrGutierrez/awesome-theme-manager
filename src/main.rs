@@ -8,6 +8,7 @@ use widgets::footer::Footer;
 use widgets::header::Header;
 
 use crate::widgets::gallery::gallery::Gallery;
+
 fn load_css() {
     let provider = CssProvider::new();
     provider.load_from_path("src/assets/style.css");
@@ -18,6 +19,7 @@ fn load_css() {
         gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
     );
 }
+
 fn main() {
     let app = Application::builder()
         .application_id("org.example.HelloWorld")

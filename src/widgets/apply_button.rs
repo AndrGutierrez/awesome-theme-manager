@@ -20,7 +20,7 @@ fn sync_theme(source: &str) -> Result<(), Box<dyn std::error::Error>> {
     src_path = home.join(src_path);
 
     if !src_path.exists() || !src_path.is_dir() {
-        //return Err(format!("Theme '{}' not found in .awesome-themes/", source).into());
+        todo!()
     }
 
     let mut dest_path = Path::new(".config/awesome").join("");
@@ -61,16 +61,15 @@ impl ApplyButton {
             .join()
             .unwrap();
             let dialog = MessageDialog::builder()
-                //.transient_for(window)
                 .modal(true)
-                .buttons(gtk::ButtonsType::OkCancel) // This gives us OK and Cancel buttons
+                .buttons(gtk::ButtonsType::OkCancel)
                 .text("Confirm Theme Change")
                 .secondary_text("Are you sure you want to apply this theme?")
                 .build();
 
             dialog.connect_response(move |dialog, response| {
                 if response == ResponseType::Ok {
-                    // User clicked OK/Apply
+                    todo!()
                 }
                 dialog.close();
             });

@@ -1,5 +1,5 @@
 use crate::{utils::widget_wrapper::WidgetWrapper, widgets::gallery::item::Item};
-use gtk::{Box, Grid, prelude::*};
+use gtk::{Grid, prelude::*};
 
 pub struct Gallery {
     pub inner: WidgetWrapper<Grid>,

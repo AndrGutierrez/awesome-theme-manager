@@ -1,5 +1,5 @@
 use crate::utils::widget_wrapper::WidgetWrapper;
-use gtk::{Box, Image, Label, Picture, prelude::*};
+use gtk::{Box, Label, Picture, prelude::*};
 use std::path::Path;
 
 pub struct Item {

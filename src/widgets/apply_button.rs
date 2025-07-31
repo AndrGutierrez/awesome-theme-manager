@@ -43,7 +43,7 @@ fn sync_theme(source: &str) -> Result<(), Box<dyn std::error::Error>> {
 fn change_theme(theme_name: &str) {
     match sync_theme(theme_name) {
         Ok(f) => f,
-        Err(err) => (),
+        Err(_) => todo!(),
     }
     Command::new("awesome-client")
         .arg("awesome.restart()")

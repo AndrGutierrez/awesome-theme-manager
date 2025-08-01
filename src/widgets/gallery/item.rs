@@ -7,10 +7,8 @@ pub struct Item {
 }
 
 impl Item {
-    pub fn new() -> Self {
-        let image_path = "example.png";
+    pub fn new(image_path: &str, title: &Label) -> Self {
         let bx = Box::new(gtk::Orientation::Vertical, 20);
-        let title = Label::new(Some("void-heart"));
         bx.add_css_class("gallery-item");
         if !Path::new(image_path).exists() {
             std::process::exit(1);
@@ -18,7 +16,7 @@ impl Item {
 
         let image = Picture::for_filename(image_path);
         bx.append(&image);
-        bx.append(&title);
+        bx.append(title);
 
         let click_controller = gtk::GestureClick::new();
         click_controller.connect_pressed(|controller, _, _, _| {

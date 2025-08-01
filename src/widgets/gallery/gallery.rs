@@ -1,17 +1,33 @@
 use crate::{utils::widget_wrapper::WidgetWrapper, widgets::gallery::item::Item};
-use gtk::{Grid, prelude::*};
+use gtk::{Grid, Label, prelude::*};
 
 pub struct Gallery {
     pub inner: WidgetWrapper<Grid>,
 }
 
+struct Theme {
+    thumbnail: String,
+    title: String,
+}
+fn get_themes() -> Vec<Theme> {
+    let theme = Theme {
+        thumbnail: "example.png".to_string(),
+        title: "void-heart".to_string(),
+    };
+    let themes = vec![theme];
+    return themes;
+}
+
 impl Gallery {
     pub fn new() -> Self {
-        let itm1 = Item::new().inner;
-        let itm2 = Item::new().inner;
-        let itm3 = Item::new().inner;
-        let itm4 = Item::new().inner;
-        let items = [itm1, itm2, itm3, itm4];
+        let mut items: Vec<_> = Vec::new();
+        let themes = get_themes();
+        for theme in themes {
+            let title = Label::new(Some(theme.title.as_str()));
+            let item = Item::new(theme.thumbnail.as_str(), &title).inner;
+            items.push(item);
+        }
+
         let bx = Grid::builder()
             .margin_start(0)
             .column_spacing(10)

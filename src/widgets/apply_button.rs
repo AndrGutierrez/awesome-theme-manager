@@ -3,16 +3,14 @@ use gtk::{
     Button, MessageDialog, ResponseType,
     prelude::{ButtonExt, WidgetExt},
 };
-use std::thread;
-
-use std::process::Command;
-pub type ApplyButton = WidgetWrapper<gtk::Button>;
 
 use fs_extra::dir::{CopyOptions, copy};
 use gtk::prelude::*;
-use std::env;
-use std::fs;
 use std::path::Path;
+use std::process::Command;
+use std::{env, fs, thread};
+
+pub type ApplyButton = WidgetWrapper<gtk::Button>;
 
 fn sync_theme(source: &str) -> Result<(), Box<dyn std::error::Error>> {
     let home = env::home_dir().expect("Could not find home directory");

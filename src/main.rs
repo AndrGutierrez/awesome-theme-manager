@@ -25,6 +25,7 @@ fn main() {
         .application_id("org.example.HelloWorld")
         .build();
 
+    println!();
     app.connect_activate(|app| {
         let win = ApplicationWindow::new(app);
         let header = Header::new();

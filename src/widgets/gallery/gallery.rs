@@ -1,7 +1,7 @@
 use std::{env, fs};
 
 use crate::{utils::widget_wrapper::WidgetWrapper, widgets::gallery::item::Item};
-use gtk::{Grid, Label, glib, prelude::*};
+use gtk::{Grid, Label, prelude::*};
 use std::path::Path;
 
 pub struct Gallery {
@@ -14,7 +14,6 @@ struct Theme {
 }
 
 fn get_themes() -> Vec<Theme> {
-    // FIXME void-heart theme thumbnail not being shown
     let home = env::home_dir().expect("Could not find home directory");
     let themes_path = Path::new(".awesome-themes");
     let src_path = home.join(themes_path);
@@ -22,12 +21,13 @@ fn get_themes() -> Vec<Theme> {
     let mut themes: Vec<Theme> = Vec::new();
     for dir in theme_dirs {
         if let Ok(entry) = dir {
-            let theme_path = src_path.join(entry.file_name());
+            let theme_name = entry.file_name();
+            let theme_path = src_path.join(&theme_name);
 
             let thumbnail_path = theme_path.join("wall.png");
             let theme = Theme {
                 thumbnail: thumbnail_path.display().to_string(),
-                title: "void-heart".to_string(),
+                title: theme_name.display().to_string(),
             };
             themes.push(theme);
         }

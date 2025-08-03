@@ -7,6 +7,7 @@ pub struct Item {
 }
 
 impl Item {
+    // TODO add support for more file formats
     pub fn new(image_path: &str, title: &Label) -> Self {
         let bx = Box::new(gtk::Orientation::Vertical, 20);
         bx.add_css_class("gallery-item");

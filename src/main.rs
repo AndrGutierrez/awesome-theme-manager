@@ -27,10 +27,8 @@ fn main() {
         .application_id("org.example.HelloWorld")
         .build();
 
-    // Create the shared state
     let selected_theme = Rc::new(RefCell::new(String::new()));
 
-    // Clone the Rc for the activate closure
     let selected_theme_clone = Rc::clone(&selected_theme);
 
     app.connect_activate(move |app| {
@@ -38,7 +36,6 @@ fn main() {
         let header = Header::new();
         let main_box = Box::new(gtk::Orientation::Vertical, 50);
 
-        // Create components with cloned Rcs
         let action_bar = Footer::new(Rc::clone(&selected_theme_clone));
         let label = Label::builder().label("Lorem ipsum").build();
         let gallerybox = Gallery::new(Rc::clone(&selected_theme_clone));

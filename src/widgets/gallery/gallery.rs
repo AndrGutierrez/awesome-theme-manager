@@ -42,7 +42,7 @@ impl Gallery {
         let themes = get_themes();
         for theme in themes {
             let title = Label::new(Some(theme.title.as_str()));
-            let item = Item::new(theme.thumbnail.as_str(), &title, &theme_state).inner;
+            let item = Item::new(theme.thumbnail.as_str(), theme.title, &theme_state).inner;
             items.push(item);
         }
 

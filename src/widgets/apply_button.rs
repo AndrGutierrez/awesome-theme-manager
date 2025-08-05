@@ -6,8 +6,8 @@ use gtk::{
 
 use fs_extra::dir::{CopyOptions, copy};
 use gtk::prelude::*;
-use std::path::Path;
 use std::process::Command;
+use std::{cell::RefCell, path::Path, rc::Rc};
 use std::{env, fs, thread};
 
 pub type ApplyButton = WidgetWrapper<gtk::Button>;
@@ -49,10 +49,11 @@ fn change_theme(theme_name: &str) {
         .expect("Failed to restart Awesome WM");
 }
 impl ApplyButton {
-    pub fn new() -> Self {
+    pub fn new(theme_state: Rc<RefCell<String>>) -> Self {
         let button = Button::builder().label("Apply").build();
 
         button.connect_clicked(move |_| {
+            let theme_name = theme_state.borrow();
             thread::spawn(move || {
                 change_theme("void-heart");
             })
@@ -61,7 +62,7 @@ impl ApplyButton {
             let dialog = MessageDialog::builder()
                 .modal(true)
                 .buttons(gtk::ButtonsType::OkCancel)
-                .text("Confirm Theme Change")
+                .text(theme_name.to_string())
                 .secondary_text("Are you sure you want to apply this theme?")
                 .build();
 

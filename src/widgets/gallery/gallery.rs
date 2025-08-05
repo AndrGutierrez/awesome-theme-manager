@@ -1,4 +1,4 @@
-use std::{env, fs};
+use std::{cell::RefCell, env, fs, rc::Rc};
 
 use crate::{utils::widget_wrapper::WidgetWrapper, widgets::gallery::item::Item};
 use gtk::{Grid, Label, prelude::*};
@@ -37,12 +37,12 @@ fn get_themes() -> Vec<Theme> {
 }
 
 impl Gallery {
-    pub fn new() -> Self {
+    pub fn new(theme_state: Rc<RefCell<String>>) -> Self {
         let mut items: Vec<_> = Vec::new();
         let themes = get_themes();
         for theme in themes {
             let title = Label::new(Some(theme.title.as_str()));
-            let item = Item::new(theme.thumbnail.as_str(), &title).inner;
+            let item = Item::new(theme.thumbnail.as_str(), &title, &theme_state).inner;
             items.push(item);
         }
 

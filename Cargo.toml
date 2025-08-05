@@ -6,3 +6,4 @@ edition = "2024"
 [dependencies]
 fs_extra = "1.3.0"
 gtk = { version = "0.9.7", package = "gtk4" }
+relm4 = "0.9.1"

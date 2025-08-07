@@ -33,6 +33,11 @@ fn sync_theme(source: &str) -> Result<(), Box<dyn std::error::Error>> {
     options.content_only = true;
     options.overwrite = true;
 
+    #[warn(unused_attributes)]
+    {
+        println!("Copying from: {}", src_path.display());
+        println!("Copying to: {}", dest_path.display());
+    }
     copy(&src_path, &dest_path, &options)?;
 
     Ok(())
@@ -53,16 +58,17 @@ impl ApplyButton {
         let button = Button::builder().label("Apply").build();
 
         button.connect_clicked(move |_| {
-            let theme_name = theme_state.borrow();
+            let theme_name = theme_state.borrow().clone();
+            let theme_string = theme_name;
             thread::spawn(move || {
-                change_theme("void-heart");
+                change_theme(theme_string.as_str());
             })
             .join()
             .unwrap();
             let dialog = MessageDialog::builder()
                 .modal(true)
                 .buttons(gtk::ButtonsType::OkCancel)
-                .text(theme_name.to_string())
+                .text("Keep these changes?")
                 .secondary_text("Are you sure you want to apply this theme?")
                 .build();
 
